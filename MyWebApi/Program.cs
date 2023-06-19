@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Reflection;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using MyWebApi.Application;
+using MyWebApi.Application.Features;
 using MyWebApi.Infra;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,7 +16,7 @@ var configuration = new ConfigurationBuilder()
 
 builder.Services.AddDbContext<BooksContext>(options =>
     options.UseSqlite(configuration.GetConnectionString("MyConnection")));
-builder.Services.AddSingleton<IBookStorage, BookStorage>();
+
 builder.Services.AddMediatR(configuration => configuration.RegisterServicesFromAssemblyContaining<ApplicationAssemblyMarker>());
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
