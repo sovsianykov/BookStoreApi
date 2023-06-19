@@ -29,5 +29,11 @@ public class BooksController : ControllerBase
         return Ok(book);
     }
 
+    [HttpPost]
+    public async Task<IActionResult> CreateBook(CreateBookRequest request)
+    {
+        var createdBook = await _mediator.Send(request);
+        return CreatedAtAction(nameof(GetBookById), new { id = createdBook.id }, createdBook);
+    }
 
 }
