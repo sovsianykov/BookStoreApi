@@ -9,13 +9,14 @@ using MyWebApi.Infra;
 var builder = WebApplication.CreateBuilder(args);
 
 var configuration = new ConfigurationBuilder()
-    .SetBasePath(Directory.GetCurrentDirectory())
-    .AddJsonFile("appsettings.json")
-    .Build();
+	.SetBasePath(Directory.GetCurrentDirectory())
+	.AddJsonFile("appsettings.json")
+	.Build();
 
 
 builder.Services.AddDbContext<BooksContext>(options =>
-    options.UseSqlite(configuration.GetConnectionString("MyConnection")));
+    options.UseSqlite(configuration.GetConnectionString("MyConnection"),
+        b => b.MigrationsAssembly("MyWebApi.WebApp")));
 
 builder.Services.AddMediatR(configuration => configuration.RegisterServicesFromAssemblyContaining<ApplicationAssemblyMarker>());
 builder.Services.AddControllers();

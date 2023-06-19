@@ -33,7 +33,4 @@
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>
-   <ItemGroup>
-  <Compile Include="..\MyWebApi.Infra\BooksContext.cs" />
-</ItemGroup>
 </Project>

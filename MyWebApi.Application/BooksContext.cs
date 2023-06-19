@@ -2,7 +2,7 @@
 using MyWebApi.Infra.Models;
 using System;
 
-namespace MyWebApi.Infra
+namespace MyWebApi.Application
 {
 	public class BooksContext : DbContext
 	{
