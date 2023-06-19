@@ -1,5 +1,5 @@
 ﻿using System;
-namespace MyWebApi.Application.Models
+namespace MyWebApi.Infra.Models
 {
 	public record BookDto(int id, string title, string author);
 	

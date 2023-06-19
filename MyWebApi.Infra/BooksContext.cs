@@ -1,11 +1,18 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using MyWebApi.Infra.Models;
+using System;
+
 namespace MyWebApi.Infra
 {
-	public class BooksContext
+	public class BooksContext : DbContext
 	{
-		public BooksContext()
-		{
-		}
-	}
+
+        public BooksContext(DbContextOptions<BooksContext> options)
+            : base(options)
+        {
+        }
+
+        public DbSet<BookDto> Books { get; set; } = default!;
+    }
 }
 

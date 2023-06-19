@@ -1,4 +1,5 @@
-﻿using MyWebApi.Application.Models;
+﻿using MyWebApi.Infra.Models;
+using MyWebApi.Infra;
 using MediatR;
 
 using System;
@@ -12,17 +13,17 @@ namespace MyWebApi.Application.Features
     public class GetBookByIdHandler : IRequestHandler<GetBookById, BookDto>
     {
 
-        private readonly IBookStorage _bookStorage;
+        private readonly BooksContext _booksContext;
 
-        public GetBookByIdHandler(IBookStorage bookStorage)
+        public GetBookByIdHandler(BooksContext booksContext)
         {
-            _bookStorage = bookStorage;
+            _booksContext = booksContext;
         }
 
 
         public Task<BookDto> Handle(GetBookById request, CancellationToken cancellationToken)
         {
-            var book = _bookStorage.Books.FirstOrDefault(b => b.id == request.Id);
+            var book = _booksContext.Books.FirstOrDefault(b => b.id == request.Id);
 
             return Task.FromResult(book);
         }
