@@ -2,10 +2,10 @@
 using MyWebApi.Infra.Models;
 using System;
 
-namespace MyWebApi.Application
+namespace MyWebApi.Infra
 {
-	public class BooksContext : DbContext
-	{
+    public class BooksContext : DbContext
+    {
 
         public BooksContext(DbContextOptions<BooksContext> options)
             : base(options)

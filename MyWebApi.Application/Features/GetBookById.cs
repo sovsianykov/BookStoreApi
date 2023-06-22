@@ -8,6 +8,11 @@ namespace MyWebApi.Application.Features
     public class GetBookById : IRequest<BookDto>
     {
         public int Id { get; set; }
+
+        public GetBookById(int id)
+        {
+            Id = id;
+        }
     }
 
     public class GetBookByIdHandler : IRequestHandler<GetBookById, BookDto>

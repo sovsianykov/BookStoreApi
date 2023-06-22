@@ -6,13 +6,13 @@ using MyWebApi.Infra;
 
 namespace MyWebApi.Application.Features
 {
-	public class GetBooksRequest : IRequest<List<BookDto>>
-	{
-		
-	}
+    public class GetBooksRequest : IRequest<List<BookDto>>
+    {
 
-	public class GetBooksRequestHandler : IRequestHandler<GetBooksRequest,List<BookDto>>
-	{
+    }
+
+    public class GetBooksRequestHandler : IRequestHandler<GetBooksRequest, List<BookDto>>
+    {
 
         private readonly BooksContext _booksContext;
 
@@ -23,11 +23,12 @@ namespace MyWebApi.Application.Features
 
 
         public Task<List<BookDto>> Handle(GetBooksRequest request, CancellationToken cancellationToken)
-		{
-			var books = _booksContext.Books.ToList();
-			return Task.FromResult(books);
-		}
+        {
+            var books = _booksContext.Books.ToList();
 
-	}
+            return Task.FromResult(books);
+        }
+
+    }
 }
 
