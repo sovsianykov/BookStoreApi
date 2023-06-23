@@ -12,7 +12,7 @@ namespace MyWebApi.Infra
         {
         }
 
-        public DbSet<BookDto> Books { get; set; } = default!;
+        public DbSet<Book> Books { get; set; } = default!;
     }
 }
 
