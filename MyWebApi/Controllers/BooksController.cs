@@ -42,4 +42,12 @@ public class BooksController : ControllerBase
         return CreatedAtAction(nameof(GetBookById), new { id = createdBook.Id }, createdBook);
     }
 
+    [HttpDelete("{id:int}")]
+    public async Task<IActionResult> DeleteBook(int id)
+    {
+        var request = new DeleteBookRequest(id);
+        await _mediator.Send(request);
+        return NoContent();
+    }
+
 }
