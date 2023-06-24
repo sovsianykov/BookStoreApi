@@ -1,9 +1,9 @@
-﻿
+
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 25.0.1705.7
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWebApi.WebApp", "MyWebApi\MyWebApi.WebApp.csproj", "{CDBFBA05-08FB-4583-8F57-AA164E283F88}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWebApi.WebApp", "MyWebApi.WebApp\MyWebApi.WebApp.csproj", "{CDBFBA05-08FB-4583-8F57-AA164E283F88}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyWebApi.Application", "MyWebApi.Application\MyWebApi.Application.csproj", "{D9F04D6D-7549-4650-B0E7-03FDA841C577}"
 EndProject
