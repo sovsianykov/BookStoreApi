@@ -4,6 +4,7 @@ using MyWebApi.Infra.Models;
 using MyWebApi.Application.DTO;
 using System.Threading;
 using System.Threading.Tasks;
+using AutoMapper;
 
 namespace MyWebApi.Application.Features
 {
@@ -14,13 +15,16 @@ namespace MyWebApi.Application.Features
         public string Author { get; set; }
     }
 
+
     public class UpdateBookRequestHandler : IRequestHandler<UpdateBookRequest, Dto>
     {
         private readonly BooksContext _booksContext;
+        private readonly IMapper _mapper;
 
-        public UpdateBookRequestHandler(BooksContext booksContext)
+        public UpdateBookRequestHandler(BooksContext booksContext, IMapper mapper)
         {
             _booksContext = booksContext;
+            _mapper = mapper;
         }
 
         public async Task<Dto> Handle(UpdateBookRequest request, CancellationToken cancellationToken)
@@ -29,7 +33,6 @@ namespace MyWebApi.Application.Features
 
             if (book == null)
             {
-
                 throw new KeyNotFoundException($"Book with ID {request.Id} not found.");
             }
 
@@ -38,16 +41,11 @@ namespace MyWebApi.Application.Features
 
             await _booksContext.SaveChangesAsync();
 
-            var dto = new Dto
-            {
-                Id = book.Id,
-                Title = book.Title,
-                Author = book.Author
-            };
+            var result = _mapper.Map<Book, Dto>(book);
 
-            return dto;
+            return result;
         }
     }
+
+
 }
-
-
