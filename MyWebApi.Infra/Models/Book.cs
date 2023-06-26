@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace MyWebApi.Infra.Models;
 
-public class Book
+public record Book
 {
     [Key]
     public int Id { get; set; }

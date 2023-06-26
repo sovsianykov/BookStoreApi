@@ -1,11 +1,14 @@
 ﻿using System.Reflection;
+using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.OpenApi.Models;
 using MyWebApi.Application;
+using MyWebApi.Application.DTO;
 using MyWebApi.Application.Features;
 using MyWebApi.Infra;
+using MyWebApi.Infra.Models;
 using MyWebApi.WebApp.Filters;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -20,6 +23,19 @@ builder.Services.AddDbContext<BooksContext>(options =>
     options.UseSqlite(configuration.GetConnectionString("MyConnection"),
         b => b.MigrationsAssembly("MyWebApi.WebApp")));
 
+
+
+
+
+
+var mapperConfig = new MapperConfiguration(config =>
+{
+    config.CreateMap<CreateBookRequest, Book>();
+    config.CreateMap<Book, Dto>();
+});
+
+IMapper mapper = mapperConfig.CreateMapper();
+builder.Services.AddSingleton(mapper);
 builder.Services.AddMediatR(configuration => configuration.RegisterServicesFromAssemblyContaining<ApplicationAssemblyMarker>());
 builder.Services.Configure<MvcOptions>(cfg => cfg.Filters.Add<ExceptionHandlingFilter>());
 builder.Services.AddControllers();

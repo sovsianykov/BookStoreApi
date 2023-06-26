@@ -4,46 +4,34 @@ using MediatR;
 using System.Threading;
 using System.Threading.Tasks;
 using MyWebApi.Application.DTO;
-
+using AutoMapper;
 
 namespace MyWebApi.Application.Features
 {
     public class CreateBookRequest : IRequest<Dto>
     {
-        public int Id { get; set; }
-        public string Title { get; set; } = String.Empty;
-        public string Author { get; set; } = String.Empty;
+        public string Title { get; set; } = string.Empty;
+        public string Author { get; set; } = string.Empty;
     }
 
     public class CreateBookRequestHandler : IRequestHandler<CreateBookRequest, Dto>
     {
         private readonly BooksContext _booksContext;
+        private readonly IMapper _mapper;
 
-        public CreateBookRequestHandler(BooksContext booksContext)
+        public CreateBookRequestHandler(BooksContext booksContext, IMapper mapper)
         {
             _booksContext = booksContext;
+            _mapper = mapper;
         }
 
         public async Task<Dto> Handle(CreateBookRequest request, CancellationToken cancellationToken)
         {
-
-
-            var dto = new Dto
-            {
-                Id = request.Id,
-                Title = request.Title,
-                Author = request.Author
-            };
-
-            var book = new Book
-            {
-                Id = request.Id,
-                Title = request.Title,
-                Author = request.Author
-            };
-
+            var book = _mapper.Map<CreateBookRequest, Book>(request);
             _booksContext.Books.Add(book);
             await _booksContext.SaveChangesAsync(cancellationToken);
+
+            var dto = _mapper.Map<Book, Dto>(book);
             return dto;
         }
     }
